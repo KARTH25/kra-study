@@ -1,0 +1,36 @@
+commands:
+  - api: 
+      config: kubectl config view # Get kube config about cluster creds and location
+      resources: kubectl api-resources # Get supported api versions for each resources
+      schema: kubectl explain <resource_name> # Get detailed view of resource schema
+      setCurrentNamespace: kubectl config set-context --current --namespace=<namespace_name> # To set current working namespace
+
+  - resources(no | ns | deploy | po | cm | secret | svc | gw | vs):
+      ''' 
+         no - nodes
+         ns - namespace
+         deploy - deployment 
+         po - pods
+         cm - configmap 
+         svc - service
+         gw - gateway
+         vs - virtualservice 
+      '''
+      create: kubectl create <resource_name> -n<namespace_name>
+      list: kubectl get <resource_name> -n<namespace_name> # To list resources of particular namespace
+      describe: kubectl describe <resource_name> -n<namespace_name> # To describe resources of particular namespace
+      delete: kubectl delete <resource_name> -n<namespace_name> # To delete resources of particular namespace
+      apply: kubectl apply -f <file_name> # To create/update a resource from a file
+      select: kubectl get <resource_name> -l <label>=<value> -n<namespace_name> # To select the resource based on label of particular namespace
+
+  - container:
+      exec: kubectl exec -it <deployment_name>/<container_name> -n<namespace_name> # To get into shell of a particular container
+
+  - scale:
+       deploy: kubectl scale deploy/<deployment_name> --replicas=<replica_count> -n<namespace_name> # To scale up/down number of instances of pod of a deployment
+
+  
+   
+    
+
+      

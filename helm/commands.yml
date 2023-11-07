@@ -1,0 +1,8 @@
+version: helm version
+create: helm create <chart_name>
+show: helm show all <chart_name>
+values: helm show values <chart_name>
+install: helm install <chart_name> --namespace <namespace_name>
+uninstall: helm uninstall <chart_name> 
+upgrade: helm upgrade <release_name> <chart_name>
+

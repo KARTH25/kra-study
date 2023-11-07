@@ -1,0 +1,89 @@
+##
+  # Resource story
+  # Deployment stating a multiple comet-xyz
+  # With Rosetta and Philae in each comet the orbiters/rovers as its container emiting liveliness metrics
+  # With its corresponding galaxy configuration mounted using configmaps
+  # with its corresponding galaxy credentials mounted as secrets
+##
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  ## Deployment name
+  name: comet
+  ## Deployment namespace
+  namespace: milkyway-galaxy
+spec:
+  ## Instance of pods to be initialized
+  replicas: {{.Values.replicaCount}}
+  ## selector to match deployment comet
+  selector:
+    matchLabels:
+      app: star
+  ## pod template labels matching selector 
+  template:
+    metadata:
+      labels:
+        app: star
+    spec:
+      ## List of containers in pod comet
+      containers:
+      ## Container 1 stating Rosetta probe in commet
+      - name: rosetta
+        image: {{.Values.image.repository}}
+        ## Env variable data about namespace from kubernetes downward API
+        env:
+        - name: namespace
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ## Env variable data about accessibility refered from configmap as env like variable
+        - name: accessibility
+          valueFrom:
+            configMapKeyRef:
+              name: milkyway-galaxy-configs   
+              key: accessible
+        ## Mounting volumes
+        volumeMounts:
+          ## Refering to attached milkyway-galaxy-configs volume
+        - name: milkyway-galaxy-configs
+          ## Mounting to /tmp path inside container as configurations.json file
+          mountPath: /tmp/configurations.json
+          ## From the referred milkyway-galaxy-configs volume refering to part 
+          ## configs in configmap which is refered as satelliteConfigs in this volume path
+          subPath: satelliteConfigs
+        ## Command to start up the container
+        command: ['sh', '-c',  'while true; do echo "{\"name\" : \"rosetta\", \"type\" : \"satellite\", \"planet\" : \"commet\", \"status\" : \"alive\",  \"galaxy\" : \"${namespace}\"}"; sleep 3600; done']
+        ## Pull image if not alreay present in node
+        imagePullPolicy: {{.Values.image.pullPolicy}}
+
+      ## Container 2 stating Philae rover landed in commet
+      - name: philae
+        image: {{.Values.image.repository}}
+        env:
+        - name: namespace
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: accessibility
+          valueFrom:
+            configMapKeyRef:
+              name: milkyway-galaxy-configs
+              key: accessible
+        volumeMounts:
+        - name: milkyway-galaxy-configs
+          mountPath: /tmp/configurations.json
+          subPath: satelliteConfigs
+        command: ['sh', '-c',  'while true; do echo "{\"name\" : \"rosetta\", \"type\" : \"satellite\", \"planet\" : \"commet\", \"status\" : \"alive\",  \"galaxy\" : \"${namespace}\"}"; sleep 3600; done']
+        imagePullPolicy: {{.Values.image.pullPolicy}}
+
+      ## Attaching created kube volume resources into pods for mounting to containers
+      volumes:
+      - name: milkyway-galaxy-configs
+        configMap:
+          name: milkyway-galaxy-configs
+          items:
+          - key: configs
+            path: satelliteConfigs
+
+      

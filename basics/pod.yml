@@ -1,0 +1,21 @@
+###
+  # Pod with single container
+  # pod describing sun with launched probes (parker solar probe) as its container
+###
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sun
+  namespace: milkyway-galaxy
+spec:
+  containers:
+  - name: parker-solar-probe
+    image: busybox
+    env:
+    - name: namespace
+      valueFrom:
+        fieldRef:
+          fieldPath : metadata.namespace
+    command: ['sh', '-c', 'while true; do echo "{\"name\" : \"parker-solar-probe\", \"type\" : \"probe\", \"planet\" : \"sun\", \"status\" : \"alive\",  \"galaxy\" : \"${namespace}\"}"; sleep 3600; done']
+    imagePullPolicy: IfNotPresent
+

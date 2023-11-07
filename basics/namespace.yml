@@ -1,0 +1,9 @@
+# create namespace from file
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: milkyway-galaxy
+  labels:
+    type: "galaxy"
+
+  
