@@ -27,7 +27,19 @@ commands:
       exec: kubectl exec -it <deployment_name>/<container_name> -n<namespace_name> # To get into shell of a particular container
 
   - scale:
-       deploy: kubectl scale deploy/<deployment_name> --replicas=<replica_count> -n<namespace_name> # To scale up/down number of instances of pod of a deployment
+      deploy: kubectl scale deploy/<deployment_name> --replicas=<replica_count> -n<namespace_name> # To scale up/down number of instances of pod of a deployment
+
+  - helm:
+      version: helm version # To check helm version
+      create: helm create <chart_name> # To create helm boilerplate template files with default values
+      show: helm show all <chart_name> # To show info about the chart 
+      values: helm show values <chart_name> # To display values in value.yml file for corresponding chart
+      install: helm install <release_name> <chart_name> --namespace <namespace_name> # To install a release with its chart using its templates dependencies on a specific namespace
+      uninstall: helm uninstall <release_name> <chart_name> # To uninstall a release using the chart
+      upgrade: helm upgrade <release_name> <chart_name> # To upgrade a release using the chart
+      rollback: helm rollback <release_name> <revision> # To rollback release with a specific revision
+      status: helm status <release_name> # To get the last status of release
+      history: helm history <release_name> # To check the release history of a particular release
 
   
    
