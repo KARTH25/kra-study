@@ -1,6 +1,7 @@
 Repository to hold study materials
 
-Visit specific branches 
+Check below branch information table to get access to specific learning contents
+================================================================================
 
 <table>
   <thead>
