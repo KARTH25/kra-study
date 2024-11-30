@@ -1,6 +1,12 @@
-Repository to hold study materials
+why
+===
 
-<h5>Check below branch information table to get access to specific learning contents</h5>
+kra-study repository aims to hold study materials
+
+What & Where
+============
+
+<h4>Check below branch information table to get access to specific learning contents</h4>
 
 
 <table>
