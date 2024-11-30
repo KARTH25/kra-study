@@ -1,0 +1,32 @@
+commands:
+  api:
+    version: docker --version # To get docker version
+  image:
+    pull : docker pull <IMAGE_NAME>:<TAG> # To pull a image from logged in docker hub
+    build: docker build -t <IMAGE_NAME> . # To build a new image
+    list : docker image ls # To list all build / pulled images 
+    remove: docker image rm <IMAGE_NAME>/<IMAGE_ID> # To remove the builded / pulled images
+    save : docker save -o <PATH_TO_LOCAL/FILE_NAME.tar> <IMAGE_NAME>/<IMAGE_ID> # To save docker image to local as tar file
+    load : docker load -i <PATH_IN_LOCAL/FILE_NAME.tar> # To load docker image in local 
+    tag : docker tag <IMAGE_NAME>/<IMAGE_ID> <DOCKER_HUB_REGISTRY>:<NAME_SPACE>:<TAG> # To tag builded images
+    push : docker push <DOCKER_HUB_REGISTRY>:<NAME_SPACE>:<TAG> # To push a tagged image to docker registry
+  conatiner:
+    list : docker ps # To list all running containers
+    list-all : docker ps -a # To list all running as well as stopped containers
+    start: docker start <CONTAINER_NAME>/<CONTAINER_ID> # To start stopped/exited container
+    stop : docker stop <CONTAINER_NAME>/<CONTAINER_ID> # To stop running container
+    inspect : docker inspect <CONTAINER_NAME>/<CONTAINER_ID> # To describe for container informations 
+    kill : docker kill <CONTAINER_NAME>/<CONTAINER_ID> # To kill a running container (diff between kill and stop is kill terminated immediately while stop is for safe termination with grace period)
+    logs : docker logs <CONTAINER_NAME>/<CONTAINER_ID> # To get logs of running container
+    remove :  docker container rm <CONTAINER_NAME>/<CONTAINER_ID> # To remove stopped/exited container
+    force-remove: docker container rm --force <CONTAINER_NAME>/<CONTAINER_ID> # To remove running container without stopping using force
+    run interactive: docker run -it <CONTAINER_NAME> <IMAGE_NAME> # To run a container in interactive mode
+    run background : docker run -it -d <CONTAINER_NAME> <IMAGE_NAME> # To run a container in interactive mode in background
+    port : docker run -it -d -p 8000:80 <CONTAINER_NAME> <IMAGE_NAME> # To Expose a port in a running container by routing traffic from local port 8000 to container port 80
+    login : docker exec -it <CONTAINER_NAME>/<CONTAINER_ID> bin/sh # To login to running containers
+    copy-local-to-container : docker cp <local_source_file_path> <CONTAINER_NAME>/<CONTAINER_ID>:<dest_folder_inside_container> # To copy files from local to specific path inside container
+    copy-container-to-local : docker cp <CONTAINER_NAME>/<CONTAINER_ID>:<source_file_path_inside_container> <destination_file_path_in_local> # To copy files inside container to local
+    
+
+
+

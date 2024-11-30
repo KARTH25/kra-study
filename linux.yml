@@ -1,0 +1,25 @@
+commands:
+  directory:
+    navigate : cd <PATH_NAME> # Navigate to directory
+    path : pwd # To get path of current working directory
+    list : ls # list all folder files present inside current working directory
+    list-all : list -al # To list all files and directories with hidden folders and files
+    remove : rm <DIR_NAME> # To remove a directory
+    remove-non-empty-dir : rm -rf <DIR_NAME> # To remove a non empty directory
+  file:
+    view : cat <FILE_PATH/FILE_NAME> # To view file content
+    edit : vi <FILE_PATH/FILE_NAME> # To create new file / edit existing content
+    remove : rm <FILE_PATH/FILE_NAME> # To remove file
+    rename : mv <FILE_PATH/FILE_NAME> <FILE_PATH/NEW_FILE_NAME> # To rename file
+    move : mv <FILE_PATH/FILE_NAME> <FILE_PATH/NEW_FILE_NAME> # To move file from one dir to anotehr dir
+  process:
+    running-process : ps -ef # To get all running process
+    kill : kill -9 <PID> # To kill a running process
+  formats:
+    fetch : <COMMAND> | grep <VALUE> # To check the values exists in output of a command
+  permissons:
+    permission : chmod <PERMISSION_VALUE> <DIR_NAME/FILE_NAME> # To provide permission to file or directory 
+    list-permissions : ls -lrt # To view permissions of files and directories
+
+
+  

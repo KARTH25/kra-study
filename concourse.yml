@@ -1,0 +1,20 @@
+commands:
+  api:
+    login : fly -t <TARGET_NAME> login --team-name <TEAM_NAME> --login-url <CONCOURSE_URL> # To login to particular team and save as target for future actions
+    logout : fly -t <TARGET_NAME> logout # To logout of a saved target
+    targets : fly targets  # To view list of logged in teams saved as targets
+    status : fly -t <TARGET_NAME> status # To check saved target status
+    userInfo : fly -t <TARGET_NAME> userinfo # To check list of teams present
+  pipeline:
+    list : fly -t <TARGET_NAME> pipelines # To list all pipelines present in the target instance
+    create : fly -t <TARGET_NAME> sp -p <PIPELINE_NAME> -c <PIPELINE.YML> # To set a new pipeline (or) update existing pipeline
+    remove : fly -t <TARGET_NAME> dp -p <PIPELINE_NAME> # To remove or destroy a existing pipeline
+    pause : fly -t ci pause-pipeline -p <PIPELINE_NAME> # To pause a pipeline
+    unpause : fly -t ci unpause-pipeline -p <PIPELINE_NAME> # To unpause a pipeline
+  job:
+    intercept : flt -t <TARGET_NAME> intercept -j <PIPELINE_NAME/TASK_NAME> # To intercept into failed job containers of a particular task
+    trigger : fly -t <TARGET_NAME> trigger-job -j <PIPELINE_NAME/TASK_NAME> # To trigger a particular task in a pipeline
+    watch : fly -t <TARGET_NAME> watch -j <PIPELINE_NAME/TASK_NAME> # To watch running job
+
+
+
