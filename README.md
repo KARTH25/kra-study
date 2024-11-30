@@ -1,7 +1,7 @@
 Repository to hold study materials
 
-Check below branch information table to get access to specific learning contents
-================================================================================
+<h5>Check below branch information table to get access to specific learning contents</h5>
+
 
 <table>
   <thead>
