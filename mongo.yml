@@ -1,0 +1,63 @@
+commands:
+  db:
+    dbs: show dbs # To get the list of database present in the cluster
+    use : use <db_name> # To create new (or) switch between existing database in cluster
+  collection: 
+    show: show collections # To Fetch the list of collections in a database
+    count: db.<collection_name>.countDocuments() # To get the document count in a collection
+    distinct: db.<collection_name>.distinct("key") # To get the distinct values of the collection of a particular field
+    skip: db.<collection_name>.find(filter).skip(n) # skip first n records from collection
+    limit: db.<collection_name>.find(filter).limit(n) # limit data with n records
+  insert:
+    # Insert one document to collection 
+    insertOne : db.<collection_name>.insertOne(json_data)
+    # Filter list of document collection based on filter and returns only the attributes specified as second arg 
+    insertMany : db.<collection_name>.insertMany([json_data])
+  find:
+    # find one document from collection based on filter and returns only the attributes specified as second arg 
+    findOne : db.<collection_name>.findOne({ "key" : "value" }, { "key1" : 1, "key2" : 1 })
+    # find list of document collection based on filter and returns only the attributes specified as second arg 
+    find : db.<collection_name>.find({ "key" : "value" }, { "key1" : 1, "key2" : 1 })
+    # findOneAndUpdate filter record and update the data and returns the data before updation
+    findOneAndUpdate : db.<collection_name>.findOneAndUpdate(filter, updateData)
+    # findOneAndDelete filter record and delete the data and returns the data before deletion
+    findOneAndDelete : db.<collection_name>.findOneAndDelete(filter, updateData)
+  update:
+    # update one document from collection based on filter with the values specified in second arg 
+    updateOne : db.<collection_name>.updateOne({ "key" : "value" }, { $set : { "key1" : 1, "key2" : 1 } })
+    # update many list of document collection based on filter and returns only the attributes specified as second arg 
+    updateMany : db.<collection_name>.updateMany({ "key" : "value" }, { "key1" : 1, "key2" : 1 })
+  delete:
+    # delete one document from collection based on filter
+    deleteOne : db.<collection_name>.deleteOne({ "key" : "value" })
+    # delete list of document from collection based on filter 
+    deleteMany : db.<collection_name>.deleteMany({ "key" : "value" })
+  operators:
+    # find records with attributes value greater than (non inclusive of value)
+    $gt: db.<collection_name>.find({ "key" : { $gt : value }})
+    # find records with attributes value lesser than (non inclusive of value)
+    $lt: db.<collection_name>.find({ "key" : { $lt : value }})
+    # find records with attributes value greater than or equal to (inclusive of value))
+    $gte: db.<collection_name>.find({ "key" : { $gt : value }})
+    # find records with attributes value lesser than or equal to (inclusive of value)
+    $lte: db.<collection_name>.find({ "key" : { $lt : value }})
+    # incr / decr attributes value of the document
+    $incr: db.<collection_name>.updateOne({ "_id" : ObjectId("12345") }, { $incr : { key : value }})
+    # remove a value from an array of the document
+    $pull: db.<collection_name>.updateOne({ "_id" : ObjectId("12345") }, { $pull : { key : value }})
+    # add a value to an array of the document
+    $push: db.<collection_name>.updateOne({ "_id" : ObjectId("12345") }, { $push : { key : value }})
+    # Adding / Removing multiple elements from array
+    $push: db.<collection_name>.updateOne({ "_id" : ObjectId("12345") }, { $push : { key : { $each : ["value1","value2"] } } })
+    # find records if provided list of values in attributes
+    $in: db.<collection_name>.find({ "key" : { $in : ["value1","value2"] }})
+    # find records if provided list of values not in attributes
+    $nin: db.<collection_name>.find({ "key" : { $nin : ["value1","value2"] }})
+    # find records with or condition
+    $or : db.<collection_name>.find({ $or : [{ "key" : "value" }, { "key" : "value" }] })
+    # find records with and condition
+    $and : db.<collection_name>.find({ $and : [{ "key" : "value" }, { "key" : "value" }] })
+    # add with aggregate
+    $add: db.<collection_name>.aggregate([ $group : { total : { $add: [ "key1", "key2" ] } } ]) 
+  
+
