@@ -5,8 +5,10 @@ commands:
     targets : fly targets  # To view list of logged in teams saved as targets
     status : fly -t <TARGET_NAME> status # To check saved target status
     userInfo : fly -t <TARGET_NAME> userinfo # To check list of teams present
+    adgroup: fly -t <TARGET_NAME> -n <TEAM_NAME> # To check the AD Group of a particular team
   pipeline:
     list : fly -t <TARGET_NAME> pipelines # To list all pipelines present in the target instance
+    get: fly -t <TARGET_NAME> gp -p <PIPELINE_NAME> # To get pipeline configuration
     create : fly -t <TARGET_NAME> sp -p <PIPELINE_NAME> -c <PIPELINE.YML> # To set a new pipeline (or) update existing pipeline
     remove : fly -t <TARGET_NAME> dp -p <PIPELINE_NAME> # To remove or destroy a existing pipeline
     pause : fly -t ci pause-pipeline -p <PIPELINE_NAME> # To pause a pipeline
@@ -15,6 +17,6 @@ commands:
     intercept : flt -t <TARGET_NAME> intercept -j <PIPELINE_NAME/TASK_NAME> # To intercept into failed job containers of a particular task
     trigger : fly -t <TARGET_NAME> trigger-job -j <PIPELINE_NAME/TASK_NAME> # To trigger a particular task in a pipeline
     watch : fly -t <TARGET_NAME> watch -j <PIPELINE_NAME/TASK_NAME> # To watch running job
-
+    abort: fly -t <TARGET_NAME> abort-build --job <PIPELINE_NAME>/<JOB_NAME> --build <BUILD_NUMBER> # To abort a build in a job
 
 
